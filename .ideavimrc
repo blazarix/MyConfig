@@ -1,0 +1,280 @@
+" 更多使用案例: https://jb.gg/share-ideavimrc
+" leader key的键位先于任何配置
+let mapleader = " "
+
+" =====================基础配置=========================
+" 更多支持的命令配置查看 https://github.com/JetBrains/ideavim/wiki/set-commands
+
+" 搜索逐字符高亮
+set hlsearch
+" 在输入要搜索的文字时，vim会实时匹配，不需要回车搜索
+set incsearch
+" 设置忽略大小写
+set ignorecase
+" 设置智能匹配大小写，当ignorecase为开启时生效
+set smartcase
+" 显示当前VIM的模式
+set showmode
+" 显示绝对行号
+set number
+" set relativenumber 显示相对行号
+set wrap            "字不超过窗口，自动折行
+set clipboard^=unnamed,unnamedplus "共享系统剪切板，可跨平台
+" 屏幕滚动时在光标上下方保留10行预览代码
+set scrolloff=10
+" ----------- idea 专属配置 ------------
+" https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
+"设置大写连接上下两行为 idea 的连接
+set ideajoin
+"设置使用 idea 的书签，默认已经开启
+" set ideamarks
+
+"==========================插件配置==========================
+"更多插件：https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
+"------- 需要下载的 Idea 插件--------------
+" IdeaVim(核心插件)
+" IdeaVim-EasyMotion(快捷跳转，全局搜索字符)
+" Which-key  (Vim快捷键提示插件)
+" CodeGlance Pro  (右侧代码小地图）
+
+" ------------ vim插件配置 ---------
+"多光标操作, 使用文档 https://github.com/terryma/vim-multiple-cursors/blob/master/doc/multiple_cursors.txt
+set multiple-cursors
+"启用环绕功能 ds cs ys
+"使用文档 https://github.com/tpope/vim-surround/blob/master/doc/surround.txt
+set surround
+"开启注释插件gcc注释一行"
+set commentary
+" ✨✨对参数进行操作 cia dia 等等，常用于写函数的时候"
+set argtextobj
+" 交换两个文本 cxiw cxiw 交换两个单词"
+set exchange
+" 开启文件树 NERDTree 插件
+set NERDTree
+
+" ------------ idea插件配置
+"开启简单跳转插件 <leader><leader>s启用搜索字符，依赖 EasyMotion 插件
+set easymotion
+"Vim快捷键提示插件
+set which-key
+
+
+"================== 居中设置 =============================
+" noremap no-recursively map 非递归映射，其他映射不会递归映射到新的
+noremap # #zz
+noremap * *zz
+noremap w wzz
+noremap W Wzz
+noremap e ezz
+noremap E Ezz
+noremap b bzz
+noremap B Bzz
+noremap 0 0zz
+noremap $ $zz
+noremap ^ ^zz
+noremap j jzz
+noremap k kzz
+noremap G Gzz
+noremap u uzz
+noremap ( (zz
+noremap ) )zz
+noremap { {zz
+noremap } }zz
+noremap [{ [{zz
+noremap ]} ]}zz
+noremap <C-D> <C-D>zz
+noremap <C-U> <C-U>zz
+noremap gd gdzz
+" normal
+nnoremap dd ddzz
+" visual
+vnoremap d dzz
+
+
+"==================== 常用基本配置 ====================
+" 插入模式下jk回到正常模式
+inoremap jk <ESC>
+"使用vim的搜索，不使用idea的
+nnoremap / /
+"取消高亮"
+nnoremap nl :nohlsearch<CR>
+" 这俩键太难按了，映射为vim的j左右大写"
+nnoremap H ^
+nnoremap L $
+"复制到行尾
+nnoremap Y y$
+"---标签页操作
+"向左切换标签页
+nnoremap E gT
+"向右切换标签页
+nnoremap R gt
+"关闭当前标签页
+nnoremap <C-q> :q<CR>
+
+
+"================== idea 动作快捷映射==============================
+" 光标返回上一步
+nnoremap <C-O> :action Back<CR>
+" 光标前进一步
+nnoremap <C-I> :action Forward<CR>
+" 注释当前行
+nnoremap ;; :action CommentByLineComment<CR>
+" 整理格式
+nnoremap ff :action ReformatCode<CR>
+" 跳转到下一个错误
+nnoremap ej :action GotoNextError<CR>
+" 跳转到上一个错误
+nnoremap ek :action GotoPreviousEkror<CR>
+" 打开终端
+nnoremap tl :action ActivateTerminalToolWindow<CR>
+
+"======================= leader 键映射==================
+
+
+"======================= g 键映射==================
+
+" ga 搜索全部动作
+noremap ga :action GotoAction<CR>
+" gb
+"noremap gb <ESC>:action <CR>
+" gc
+"noremap gc <ESC>:action <CR>
+" gd - goto declaration。跳转到定义处
+noremap gd <ESC>:action GotoDeclaration<CR>
+" ge
+"noremap ge <ESC>:action <CR>
+" gf - goto file。跳转到指定文件
+noremap gf <ESC>:action GotoFile<CR>
+" gg
+"noremap gg <ESC>:action MUST_NOT_BE_CHANGED!!!<CR>
+" gh - hierarchy。查看关系图面板
+noremap ghc <ESC>:action CallHierarchy<CR>
+noremap ght <ESC>:action TypeHierarchy<CR>
+noremap ghm <ESC>:action MethodHierarchy<CR>
+" gi - goto implement。跳转到实现
+noremap gi <ESC>:action GotoImplementation<CR>
+" gj
+"noremap gj <ESC>:action <CR>
+" gk
+"noremap gk <ESC>:action <CR>
+" gl
+"noremap gl <ESC>:action <CR>
+" gm - goto method。查找方法
+noremap gm <ESC>:action GotoSymbol<CR>
+" gc - goto class。查找结构体
+noremap gn <ESC>:action GotoClass<CR>
+" go
+"noremap go <ESC>:action <CR>
+" gp = goto param参数信息，常用于查看函数需要哪些参数，替代 <C-P> 的功能
+noremap gp <ESC>:action ParameterInfo<CR>
+" gq
+" noremap gq <ESC>:action <CR>
+" gr
+" noremap gr <ESC>:action <CR>
+" gs -  goto superMethod 跳转到父类方法，常用于跳转到接口
+noremap gs <ESC>:action GotoSuperMethod<CR>
+" gt
+"noremap gt <ESC>:action <CR>
+" gu
+"noremap gu <ESC>:action <CR>
+" gv goto variable 从方法或函数周提取返回值, 根据方法推断返回类型，并生成默认变量
+nnoremap gv :action IntroduceVariable<CR>
+" gw - goto window 打开最近文件窗口，相当于 <C-TAB>，还是推荐 <C-TAB>，可以连续点击 tab选择
+nnoremap gw <ESC>: action RecentFiles<CR>
+" gx - close all but this。关闭除了本窗口的所有窗口
+noremap gx <ESC>:action CloseAllEditorsButActive<CR>
+" gy - goto y 复制当前光标所在行的绝对位置
+noremap gy :action CopyReference<CR>
+" gz
+"noremap gz <ESC>:action <CR>
+
+
+"====================== leader 键映射 =================
+" 个人习惯
+noremap <leader>` <ESC>:action SelectInProjectView<CR>
+" Leader key relevant
+
+" ace jump
+"noremap <leader>a <ESC>:action <CR>
+" breakpoints
+noremap <leader>b <ESC>:action ViewBreakpoints<CR>
+" step into
+noremap <leader>c <ESC>:action SmartStepInto<CR>
+" debug option
+noremap <leader>d <ESC>:action ChooseDebugConfiguration<CR>
+" error description
+noremap <leader>e <ESC>:action ShowErrorDescription<CR>
+" 同样也是debug，因为d已经被ChooseDebugConfiguration占领, 所以就放在了d键隔壁.
+noremap <leader>f <ESC>:action DebugClass<CR>
+" g
+noremap <leader>g <ESC>:action Generate<CR>
+" hide all
+noremap <leader>h <ESC>:action HideAllWindows<CR>
+" import
+noremap <leader>i <ESC>:action Maven.Reimport<CR>
+" jump to next error
+noremap <leader>j <ESC>:action GotoNextError<CR>
+" jump to previous error，就近原则
+noremap <leader>k <ESC>:action GotoPreviousError<CR>
+" light up
+noremap <leader>l <ESC>:action HighlightUsagesInFile<CR>
+" mute breakpoints
+noremap <leader>m <ESC>:action XDebugger.MuteBreakpoints<CR>
+" 因为属于breakpoint范畴的功能, 所以就选择了b和m的隔壁
+noremap <leader>n <ESC>:action ToggleLineBreakpoint<CR>
+" open file path
+noremap <leader>o <ESC>:action ShowFilePath<CR>
+" show projects
+noremap <leader>p <ESC>:action ManageRecentProjects<CR>
+" quit
+noremap <leader>q :wq<CR>
+" return
+noremap <leader>r <ESC>:action Rerun<CR>
+" structure
+noremap <leader>s <ESC>:action FileStructurePopup<CR>
+" Windows或者MacOS的快捷键都与t相关, 所以选择t作为键
+noremap <leader>t <ESC>:action Refactorings.QuickListPopupAction<CR>
+" usage
+noremap <leader>u <ESC>:action ShowUsages<CR>
+" evaluate expression - v
+noremap <leader>v <ESC>:action EvaluateExpression<CR>
+" w
+"noremap <leader>w <ESC>:action<CR>
+" step over
+noremap <leader>x <ESC>:action StepOver<CR>
+" y
+"noremap <leader>y <ESC>:action <CR>
+" 本行皆为debug所用
+" resume - z
+noremap <leader>z <ESC>:action Resume<CR>
+
+" 粘贴最近复制寄存器
+noremap <leader>; "0p
+
+
+" \ also works
+"noremap \q <ESC>:action <CR>
+" refresh
+noremap \r <ESC>:source ~/.ideavimrc<CR>
+" uml popup
+"noremap \u <ESC>:action <CR>
+" git flow
+"noremap \[ <ESC>:action VcsGroups<CR>
+" Vcs
+"noremap \] <ESC>:action Git.Menu<CR>
+
+" global find
+noremap g/ <ESC>:action FindInPath<CR>
+" gloaal replace
+noremap g' <ESC>:action ReplaceInPath<CR>
+" find
+"noremap / <ESC>:action Find<CR>
+" replace
+noremap ' <ESC>:action Replace<CR>
+" previous method
+noremap [[ <ESC>:action MethodUp<CR>
+" next method
+noremap ]] <ESC>:action MethodDown<CR>
+
+" multiple cursors
+map <A-M>  <A-N>
